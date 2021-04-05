@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
+
 const schema = mongoose.Schema;
+
 const inventory = [{
     item_id: schema.Types.ObjectId, 
     amount: Number, 
@@ -7,7 +9,7 @@ const inventory = [{
 }];
 
 const itemGet = [{
-    item_id: schema.ObjectId,
+    item_id: schema.Types.ObjectId,
     min_amount: Number, 
     max_amount: Number,
     chance: mongoose.Schema.Types.Decimal128,
@@ -52,48 +54,119 @@ const myMonster = [{
 }];
 
 const AccountSchema = schema({
-    _id: schema.Types.ObjectId,
-    username: String,
-    current_level: Number,
-    current_exp: Number,
-    coins: Number,
-    gold: Number,
-    registered_date: Date,
-    last_login: Date,
+    _id: {
+        type: schema.Types.ObjectId
+    },
+    username: {
+        type: String,
+        require: true,
+    },
+    current_level: {
+        type: Number,
+        require: true,
+    },
+    current_exp: {
+        type: Number,
+        require: true
+    },
+    coins: {
+        type: Number,
+        require: true,
+    },
+    gold: {
+        type: Number,
+        require: true,
+    },
+    registered_date: {
+        type: Date,
+        default: Date.now,
+    },
+    last_login: {
+        type: Date,
+        default: Date.now,
+    },
     inventory,
     myMonster,
     ref: 'Account',
 });
 
 const LevelDBSchema = schema({
-    _id: schema.Types.ObjectId,
+    _id: {
+        type: schema.Types.ObjectId,
+        require: true,
+    },
     roundInfoList,
     ref: 'LevelDB',
 });
 
 const ItemDBSchema = schema({
-    _id: schema.Types.ObjectId,
-    description: String,
+    _id: {
+        type: schema.Types.ObjectId,
+        require: true,
+    },
+    description: {
+        type: String,
+        require: true,
+    },
     ref: 'ItemDB',
 });
 
 const PokemonDBSchema = schema({
-    _id: schema.Types.ObjectId,
-    description: String,
-    hpBase: Number,
-    atkBase: Number,
-    defBase: Number,
-    spAtkBase: Number,
-    spDefBase: Number,
-    agility: Number,
+    _id: {
+        type: schema.Types.ObjectId, 
+        require: true,
+    },
+    description: {
+        type: String, 
+        required: true,
+    },
+    hpBase: {
+        type: Number,
+        require: true,
+    },
+    atkBase: {
+        type: Number,
+        require: true,
+    },
+    defBase: {
+        type: Number,
+        require: true,
+    },
+    spAtkBase: {
+        type: Number,
+        require: true,
+    },
+    spDefBase: {
+        type: Number,
+        require: true,
+    },
+    agility: {
+        type: Number,
+        require: true,
+    },
     requiredItemUpgrade,
     ref: 'PokemonDB',
-})
+});
 
 const LevelLogSchema = schema({
-    _id: schema.Types.ObjectId,
-    player_id: schema.Types.ObjectId,
-    timestamp: Date,
-    levelId: schema.Types.ObjectId,
+    _id: {
+        type: schema.Types.ObjectId,
+        require: true,
+    },
+    player_id: {
+        type: schema.Types.ObjectId,
+        require: true,
+    },
+    timestamp: {
+        type: Date,
+        default: Date.now,
+    },
+    levelId: {
+        type: schema.Types.ObjectId,
+        require: true,
+    },
     roundInfo,
-})
+});
+
+const account = mongoose.model('Account', AccountSchema);
+const levelLog = mongoose.model('Level Log', LevelLogSchema);
