@@ -1,20 +1,21 @@
 const mongoose = require('mongoose');
-
+const schema = mongoose.Schema;
 const inventory = [{
-    item_id: mongoose.Schema.Types.ObjectId, 
+    item_id: schema.Types.ObjectId, 
     amount: Number, 
     ref: 'Inventory'
 }];
 
 const itemGet = [{
-    item_id: mongoose.Schema.Types.ObjectId,
+    item_id: schema.ObjectId,
     min_amount: Number, 
     max_amount: Number,
     chance: mongoose.Schema.Types.Decimal128,
     ref: 'ItemGet',
 }];
 
-const roundInfoList = [{round_id: mongoose.Schema.Types.ObjectId, 
+const roundInfoList = [{
+    round_id: schema.ObjectId, 
     minGold: Number, 
     maxGold: Number,
     round: Number, exp: Number, itemGet,
@@ -22,7 +23,7 @@ const roundInfoList = [{round_id: mongoose.Schema.Types.ObjectId,
 }];
 
 const roundInfo = {
-    _id: mongoose.Schema.Types.ObjectId,
+    _id: schema.ObjectId,
     exp: Number,
     round: Number,
     gold: Number,
@@ -32,13 +33,15 @@ const roundInfo = {
 };
 
 const requiredItemUpgrade = [{
-    item_id: mongoose.Schema.Types.ObjectId, 
+    item_id: schema.ObjectId, 
     amount: Number, 
     ref: 'RequiredItemUpgrade'
 }];
 
-const myMonster = [{_id: mongoose.Schema.Types.ObjectId, level: Number,
-    nature: mongoose.Schema.Types.ObjectId, 
+const myMonster = [{
+    _id: schema.Types.ObjectId, 
+    level: Number,
+    nature: schema.Types.ObjectId, 
     hp: Number, 
     atk: Number, 
     def: Number, 
@@ -48,8 +51,8 @@ const myMonster = [{_id: mongoose.Schema.Types.ObjectId, level: Number,
     ref: 'MyMonster'
 }];
 
-const AccountSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
+const AccountSchema = schema({
+    _id: schema.Types.ObjectId,
     username: String,
     current_level: Number,
     current_exp: Number,
@@ -62,20 +65,20 @@ const AccountSchema = mongoose.Schema({
     ref: 'Account',
 });
 
-const LevelDBSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
+const LevelDBSchema = schema({
+    _id: schema.Types.ObjectId,
     roundInfoList,
     ref: 'LevelDB',
 });
 
-const ItemDBSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
+const ItemDBSchema = schema({
+    _id: schema.Types.ObjectId,
     description: String,
     ref: 'ItemDB',
 });
 
-const PokemonDBSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
+const PokemonDBSchema = schema({
+    _id: schema.Types.ObjectId,
     description: String,
     hpBase: Number,
     atkBase: Number,
@@ -87,10 +90,10 @@ const PokemonDBSchema = mongoose.Schema({
     ref: 'PokemonDB',
 })
 
-const LevelLogSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
-    player_id: mongoose.Schema.Types.ObjectId,
+const LevelLogSchema = schema({
+    _id: schema.Types.ObjectId,
+    player_id: schema.Types.ObjectId,
     timestamp: Date,
-    levelId: mongoose.Schema.Types.ObjectId,
+    levelId: schema.Types.ObjectId,
     roundInfo,
 })
