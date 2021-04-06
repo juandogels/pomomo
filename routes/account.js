@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Account = require("../Schema");
 
-// Get all posts
 router.get("/", async (req, res) => {
   try {
     const accounts = await Account.find();
@@ -17,12 +16,13 @@ router.post("/", (req, res) => {
   const account = new Account({
     username: req.body.username,
     current_level: req.body.current_level,
-    current_exp: req.body.current_exp,
-    coins: req.body.coins,
-    gold: req.body.gold,
+    // current_exp: req.body.current_exp,
+    // coins: req.body.coins,
+    // gold: req.body.gold,
+    inventory: req.body.inventory,
   });
 
-  post
+  account
     .save()
     .then((data) => {
       res.json(data);

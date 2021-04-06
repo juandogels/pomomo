@@ -60,9 +60,6 @@ const myMonster = [
 ];
 
 const AccountSchema = schema({
-  _id: {
-    type: schema.Types.ObjectId,
-  },
   username: {
     type: String,
     require: true,
@@ -170,5 +167,5 @@ const LevelLogSchema = schema({
   roundInfo,
 });
 
-const account = mongoose.model("Account", AccountSchema);
+module.exports = mongoose.model("Account", AccountSchema);
 const levelLog = mongoose.model("Level Log", LevelLogSchema);
