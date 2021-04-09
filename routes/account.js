@@ -16,10 +16,11 @@ router.post("/", (req, res) => {
   const account = new Account({
     username: req.body.username,
     current_level: req.body.current_level,
-    // current_exp: req.body.current_exp,
-    // coins: req.body.coins,
-    // gold: req.body.gold,
+    current_exp: req.body.current_exp,
+    coins: req.body.coins,
+    gold: req.body.gold,
     inventory: req.body.inventory,
+    inventory: req.body.myMonster,
   });
 
   account
