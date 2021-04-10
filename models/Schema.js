@@ -168,5 +168,4 @@ const LevelLogSchema = schema({
     roundInfo,
 });
 
-const account = mongoose.model('Account', AccountSchema);
-const levelLog = mongoose.model('Level Log', LevelLogSchema);
+module.exports = mongoose.model('Account', AccountSchema);
