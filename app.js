@@ -32,8 +32,10 @@ require('dotenv/config');
 app.use(bodyParser.json());
 
 const itemDBsRoute = require('./routes/ItemDBs');
+const shopDBsRoute = require('./routes/shopDBs');
 
 app.use('/itemDBs', itemDBsRoute);
+app.use('/shopDBs', shopDBsRoute);
 
 app.get('/', (req, res) => {
     res.send('Home page');

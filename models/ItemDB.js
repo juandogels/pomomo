@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
-const ItemDBSchema = mongoose.Schema({
+const schema = mongoose.Schema;
+
+const ItemDBSchema = schema({
     description: {
         type: String,
         required: true,

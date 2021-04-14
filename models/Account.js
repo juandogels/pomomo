@@ -38,6 +38,10 @@ const AccountSchema = schema({
         amount: Number, 
     }],
     myMonster: [{
+        monsterID: {
+            type: schema.Types.ObjectId,
+            ref: ''
+        },
         level: Number,
         // nature: schema.Types.ObjectId, 
         health: Number, 

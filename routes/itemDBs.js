@@ -9,9 +9,9 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     const itemDB = new ItemDB({
-        description: req.body.description
-    });
-
+        description: req.body.description,
+        name: req.body.name
+    })
     itemDB.save()
     .then(data => {
         res.json(data);
