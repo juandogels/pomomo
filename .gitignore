@@ -1,0 +1,2 @@
+#ignore DB connection username and password
+.env
