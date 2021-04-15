@@ -1,7 +1,6 @@
 const express = require('express');
-const ShopDB = require('../models/ShopDB');
 const router = express.Router();
-const ItemDB = require('../models/ShopDB');
+const ShopDB = require('../models/ShopDB');
 
 //simple get request
 router.get('/', (req, res) => {
