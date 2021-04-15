@@ -40,16 +40,17 @@ const AccountSchema = schema({
     myMonster: [{
         monsterID: {
             type: schema.Types.ObjectId,
-            ref: ''
+            ref: 'MonsterDB'
         },
         level: Number,
+        rarity: Number,
         // nature: schema.Types.ObjectId, 
-        health: Number, 
+        healthPool: Number, 
         attack: Number, 
         defense: Number, 
         specialAttack: Number,
         specialDefense: Number, 
-        agility: Number, 
+        agilityPoints: Number, 
     }],
     levelsCompletedLog: [{
         levelID: {
