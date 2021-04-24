@@ -14,6 +14,7 @@ const itemDBsRoute = require('./routes/ItemDBs');
 const shopDBsRoute = require('./routes/shopDBs');
 const monsterDBsRoute = require('./routes/monsterDBs');
 
+//initialize routes
 app.use('/itemDBs', itemDBsRoute);
 app.use('/shopDBs', shopDBsRoute);
 app.use('/monsterDBs', monsterDBsRoute);

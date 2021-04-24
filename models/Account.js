@@ -44,7 +44,6 @@ const AccountSchema = schema({
         },
         level: Number,
         rarity: Number,
-        // nature: schema.Types.ObjectId, 
         healthPool: Number, 
         attack: Number, 
         defense: Number, 
