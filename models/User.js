@@ -5,11 +5,7 @@ const passportLocalMongoose = require('passport-local-mongoose');
 //no password is added since passport-local-mongoose doesn't need it
 //passport-local-mongoose will do the password hashing/auth for us
 const UserSchema = new schema({
-    username: {
-        type: String,
-        unique: true,
-        required: true,
-    },
+    username: String,
     email: {
         type: String,
         required: true,

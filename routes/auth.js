@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 
 router.post('/register_login', (req, res, next) => {
+    //callback invokes the local strategy and if no error and user is found it logs the user in
     passport.authenticate('local', (err, user, info) => {
         if (err) {
             return res.status(400).json({errors: err});
