@@ -7,7 +7,7 @@ router.get('/', IsAuthenticated, (req, res) => {
     res.send('You have entered the Monster DB Homepage');
 });
 
-router.post('/newMonster', IsAuthenticated, (req, res) => {
+router.post('/newMonsterDB', IsAuthenticated, (req, res) => {
     const monsterDB = new MonsterDB({
         name: req.body.name,
         description: req.body.description,

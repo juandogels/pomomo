@@ -7,7 +7,7 @@ router.get('/', IsAuthenticated, (req, res) => {
     res.send('Shop DB');
 });
 
-router.post('/', IsAuthenticated, (req, res) => {
+router.post('/newShopDB', IsAuthenticated, (req, res) => {
     const shopDB = new ShopDB({
         purchasedItemName: req.body.purchasedItemName,
         itemDescription: req.body.itemDescription,
