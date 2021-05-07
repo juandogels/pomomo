@@ -4,7 +4,7 @@ const router = express.Router();
 const ItemDB = require('../models/ItemDB');
 
 //simple get request
-router.get('/', (req, res) => {
+router.get('/', IsAuthenticated, (req, res) => {
     res.send('Item DB');
 });
 

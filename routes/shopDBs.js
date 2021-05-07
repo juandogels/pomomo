@@ -3,11 +3,11 @@ const router = express.Router();
 const ShopDB = require('../models/ShopDB');
 
 //simple get request
-router.get('/', (req, res) => {
+router.get('/', IsAuthenticated, (req, res) => {
     res.send('Shop DB');
 });
 
-router.post('/', (req, res) => {
+router.post('/', IsAuthenticated, (req, res) => {
     const shopDB = new ShopDB({
         purchasedItemName: req.body.purchasedItemName,
         itemDescription: req.body.itemDescription,
@@ -26,5 +26,15 @@ router.post('/', (req, res) => {
         res.json({message: err});
     })
 });
+
+function IsAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        next();
+        console.log("Authenticated!");
+    } else {
+        res.redirect('/api/auth/login');
+        console.log("Not authenticated");
+    }
+};
 
 module.exports = router;

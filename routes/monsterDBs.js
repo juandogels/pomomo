@@ -3,11 +3,11 @@ const router = express.Router();
 const MonsterDB = require('../models/MonsterDB');
 
 //simple get request
-router.get('/', (req, res) => {
+router.get('/', IsAuthenticated, (req, res) => {
     res.send('You have entered the Monster DB Homepage');
 });
 
-router.post('/newMonster', (req, res) => {
+router.post('/newMonster', IsAuthenticated, (req, res) => {
     const monsterDB = new MonsterDB({
         name: req.body.name,
         description: req.body.description,
@@ -28,5 +28,15 @@ router.post('/newMonster', (req, res) => {
         res.json({message: err});
     })
 });
+
+function IsAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        next();
+        console.log("Authenticated!");
+    } else {
+        res.redirect('/api/auth/login');
+        console.log("Not authenticated");
+    }
+};
 
 module.exports = router;
