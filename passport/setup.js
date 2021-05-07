@@ -16,33 +16,35 @@ passport.deserializeUser((id, done) => {
 });
 
 passport.use(
-    new LocalStrategy({ usernameField: "email"}, (email, password, done) => {
-        //Match User
+    new LocalStrategy({usernameField: "email"}, (email, password, done) => {
         User.findOne({email: email})
         .then(user => {
-            //Create new User
+            console.log("finding user");
             if(!user) {
+                console.log("user not found, creating one");
                 const newUser = new User({email, password});
-                //Hashing password before saving in DB
+                //Hashing password before entering into database
                 bcrypt.genSalt(10, (err, salt) => {
+                    if (err) return next(err);
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
-                        if (err) throw err;
+                        if (err) return next(err);
                         newUser.password = hash;
                         newUser
                         .save()
                         .then(user => {
+                            console.log("New user created");
                             return done(null, user);
                         })
                         .catch(err => {
+                            console.log(err);
                             return done(null, false, {message: err});
                         });
                     });
                 });
-                //Return other user
             } else {
-                //Match password
+                console.log("User found, comparing password, password check completed.");
                 bcrypt.compare(password, user.password, (err, isMatch) => {
-                    if (err) throw err;
+                    if (err) return next(err);
                     if (isMatch) {
                         return done(null, user);
                     } else {
@@ -50,8 +52,9 @@ passport.use(
                     }
                 });
             }
-        })
+        }) 
         .catch(err => {
+            console.log("user.findOne doesn't work");
             return done(null, false, {message: err});
         });
     })

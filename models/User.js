@@ -2,16 +2,15 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 const passportLocalMongoose = require('passport-local-mongoose');
 
-//no password is added since passport-local-mongoose doesn't need it
-//passport-local-mongoose will do the password hashing/auth for us
 const UserSchema = new schema({
-    username: String,
     email: {
         type: String,
         required: true,
-        unique: true,
     },
-    password: String,
+    password: {
+        type: String,
+        required: true,
+    }
 });
 
 UserSchema.plugin(passportLocalMongoose);

@@ -40,13 +40,12 @@ const shopDBsRoute = require('./routes/shopDBs');
 const monsterDBsRoute = require('./routes/monsterDBs');
 
 //initialize routes
-app.use('/api/auth', auth);
 app.get('/', (req, res) => res.send("Hey there!"));
 
 app.listen(PORT, () => console.log(`Backend listening on port ${PORT}!`));
-
-app.use('/itemDBs', itemDBsRoute);
-app.use('/shopDBs', shopDBsRoute);
+app.use('/api/auth', auth);
+app.use('/itemDBs',  itemDBsRoute);
+app.use('/shopDBs',  shopDBsRoute);
 app.use('/monsterDBs', monsterDBsRoute);
 
 //Connecting to MongoDB

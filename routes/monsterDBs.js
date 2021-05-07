@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     res.send('You have entered the Monster DB Homepage');
 });
 
-router.post('/', (req, res) => {
+router.post('/newMonster', (req, res) => {
     const monsterDB = new MonsterDB({
         name: req.body.name,
         description: req.body.description,
