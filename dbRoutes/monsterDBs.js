@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const MonsterDB = require('../models/MonsterDB');
+const MonsterDB = require('../app/models/MonsterDB');
 
 //simple get request
 router.get('/', IsAuthenticated, (req, res) => {

@@ -1,54 +1,37 @@
-const express = require('express');
-const app = express();
-const mongoose = require('mongoose');
-const session = require('express-session');
-//connectMongo doesn't work with versions later than @3
-const MongoStore = require('connect-mongo')(session);
+var express  = require('express');
+var app      = express();
+var port     = process.env.PORT || 8080;
+var mongoose = require('mongoose');
+var passport = require('passport');
+var flash    = require('connect-flash');
 
-const passport = require('./passport/setup');
-const auth = require('./routes/auth');
+var morgan       = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser   = require('body-parser');
+var session      = require('express-session');
 
-const PORT = 5000;
+var configDB = require('./config/database.js');
 
-const bodyParser = require('body-parser');
-const cors = require('cors');
-require('dotenv/config');
+// configuration ===============================================================
+mongoose.connect(configDB.url); // connect to our database
 
-//Middlewares
-app.use(bodyParser.json());
-app.use(express.json());
-app.use(express.urlencoded({extended: false}));
-app.use(cors());
+require('./config/passport')(passport); // pass passport for configuration
 
-//Express Session
-app.use(
-    session({
-        secret: "this is so secret",
-        resave: false,
-        saveUninitialized: true,
-        store: new MongoStore({mongooseConnection: mongoose.connection})
-    })
-);
+// set up our express application
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser()); // get information from html forms
+app.set('view engine', 'ejs'); // set up ejs for templating
 
-//passport middleware
+// required for passport
+app.use(session({ secret: 'so secret tbh lmao' })); // session secret
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
 
-//Routes
-const itemDBsRoute = require('./routes/ItemDBs');
-const shopDBsRoute = require('./routes/shopDBs');
-const monsterDBsRoute = require('./routes/monsterDBs');
+// routes ======================================================================
+require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
-//initialize routes
-app.get('/', (req, res) => res.send("Hey there!"));
-
-app.listen(PORT, () => console.log(`Backend listening on port ${PORT}!`));
-app.use('/api/auth', auth);
-app.use('/itemDBs',  itemDBsRoute);
-app.use('/shopDBs',  shopDBsRoute);
-app.use('/monsterDBs', monsterDBsRoute);
-
-//Connecting to MongoDB
-mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () =>
-    console.log('Connected to MongoDB')
-);
+// launch ======================================================================
+app.listen(port);
+console.log('Backend listening to port ' + port);
