@@ -1,20 +1,37 @@
-const express = require('express');
-const app = express();
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-require('dotenv/config');
+var express  = require('express');
+var app      = express();
+var port     = process.env.PORT || 8080;
+var mongoose = require('mongoose');
+var passport = require('passport');
+var flash    = require('connect-flash');
 
-app.use(bodyParser.json());
+var morgan       = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser   = require('body-parser');
+var session      = require('express-session');
 
-const postsRoute = require('./routes/posts');
+var configDB = require('./config/database.js');
 
-app.use('/posts', postsRoute);
+// configuration ===============================================================
+mongoose.connect(configDB.url); // connect to our database
 
-app.get('/', (req, res) => {
-    res.send('We are on home');
-});
-//Connecting to MongoDB
-mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () =>
-    console.log('Connected to MongoDB')
-);
-app.listen(3000);
+require('./config/passport')(passport); // pass passport for configuration
+
+// set up our express application
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser()); // get information from html forms
+app.set('view engine', 'ejs'); // set up ejs for templating
+
+// required for passport
+app.use(session({ secret: 'so secret tbh lmao' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+
+// routes ======================================================================
+require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+
+// launch ======================================================================
+app.listen(port);
+console.log('Backend listening to port ' + port);

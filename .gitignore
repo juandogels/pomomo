@@ -1,0 +1,4 @@
+#ignore DB connection username and password
+.env
+config/database.js
+node_modules/
