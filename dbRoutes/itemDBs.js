@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
-const ItemDB = require('../models/ItemDB');
+const ItemDB = require('../app/models/ItemDB');
 
 //simple get request
 router.get('/', IsAuthenticated, (req, res) => {

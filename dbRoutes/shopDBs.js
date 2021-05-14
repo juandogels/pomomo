@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const ShopDB = require('../models/ShopDB');
+const ShopDB = require('../app/models/ShopDB');
 
 //simple get request
 router.get('/', IsAuthenticated, (req, res) => {

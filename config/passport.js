@@ -1,5 +1,5 @@
 var LocalStrategy = require('passport-local').Strategy;
-
+var bcrypt = require('bcrypt-nodejs');
 var User = require('../app/models/User');
 
 module.exports = (passport) => {
@@ -62,6 +62,10 @@ module.exports = (passport) => {
             }
             if (!user) {
                 return done(null, false, req.flash('loginMessage', 'No user found'))
+            }
+            const validPassword = bcrypt.compareSync(password, user.local.password);
+            if (!validPassword) {
+                return done(null, false, req.flash('loginMessage', 'Incorrect password'));
             }
             return done(null, user);
         });
