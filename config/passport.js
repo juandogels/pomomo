@@ -15,7 +15,7 @@ module.exports = (passport) => {
         });
     });
 
-    //LOCAL SIGNUP (for both login and signup)
+    //LOCAL SIGNUP
     passport.use('local-signup', new LocalStrategy({
         usernameField: 'email', 
         passwordField: 'password',
@@ -50,6 +50,7 @@ module.exports = (passport) => {
         });
     }));
 
+    //local login
     passport.use('local-login', new LocalStrategy({
         usernameField: 'email', 
         passwordField: 'password',
