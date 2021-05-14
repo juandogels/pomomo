@@ -1,2 +1,3 @@
-# test/mongodb_api
-Test/mongodb_api is used for a short feature branch before committing to mongodb_api when the api is done, it includes testing features and folders to check which codes work better or more efficiently.
+# API in the making
+All the API stuff that we need for our game is in this file
+*README TO BE ADDED SOON*
