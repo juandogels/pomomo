@@ -5,9 +5,19 @@ const ItemDB = require('../app/models/ItemDB');
 //gets all existing items
 router.get('/', IsAuthenticated, async (req, res) => {
     try{
-        const itemDBs = await ItemDB.find();
-        res.json(itemDBs);
+        const items = await ItemDB.find();
+        res.json(items);
     }catch(err) {
+        res.json({message: err});
+    }
+});
+
+//gets a specific item by ID
+router.get('/:id', IsAuthenticated, async (req, res) => {
+    try{
+        const item = await ItemDB.findById(req.params.id);
+        res.json(item);
+    }catch(err){
         res.json({message: err});
     }
 });

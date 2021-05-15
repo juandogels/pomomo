@@ -8,28 +8,25 @@ const AccountSchema = schema({
     },
     currentLevel: {
         type: Number,
-        require: true,
+        default: 0,
     },
     currentExperience: {
         type: Number,
-        require: true
+        default: 0
     },
     coins: {
         type: Number,
-        require: true,
+        default: 0,
     },
     gold: {
         type: Number,
-        require: true,
+        default: 0,
     },
     registeredDate: {
         type: Date,
         default: Date.now,
     },
-    lastLogin: {
-        type: Date,
-        default: Date.now,
-    },
+    lastLogin: Date,
     inventory: [{
         itemID: {
             type: schema.Types.ObjectId,

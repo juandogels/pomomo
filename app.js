@@ -32,8 +32,10 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 // routes requirement
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 const itemDBs = require('./dbRoutes/itemDBs');
+const accounts = require('./dbRoutes/accounts');
 
 app.use('/itemDBs', itemDBs);
+app.use('/accounts', accounts);
 // launch ======================================================================
 app.listen(port);
 console.log('Backend listening to port ' + port);
