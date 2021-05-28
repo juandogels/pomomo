@@ -2,3 +2,4 @@
 .env
 config/database.js
 node_modules/
+backup.txt
