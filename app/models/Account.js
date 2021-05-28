@@ -67,6 +67,10 @@ const AccountSchema = schema({
 
     }],
 });
-
+AccountSchema.index({currentLevel: 1, currentExperience: 1});
+AccountSchema.index({coins: 1, gold: 1});
+AccountSchema.index({username: 1, lastLogin: 1, registeredDate: 1});
+AccountSchema.index({username: 1});
+AccountSchema.index({username: 1, inventory: 1, myMonster: 1, levelsCompletedLog: 1});
 const Account = mongoose.model('Account', AccountSchema);
 module.exports = Account;
