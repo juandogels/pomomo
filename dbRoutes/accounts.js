@@ -82,6 +82,7 @@ router.patch('/finishGame/:id', IsAuthenticated, async (req, res) => {
     }
 });
 
+//checks for authentication
 function IsAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         next();

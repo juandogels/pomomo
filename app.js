@@ -12,7 +12,7 @@ var session      = require('express-session');
 
 var configDB = require('./config/database.js');
 
-// configuration ===============================================================
+// configuration
 mongoose.connect(configDB.url, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true}); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
