@@ -6,7 +6,7 @@ This repository contains simple login + registration logic created with EJS whic
 
 **Get started**
 Since we haven't deployed our code to a live website, it needs to be done locally first. To get started, clone our repository and head over to the repository. 
-```
+
 NOTE: We're using MongoDB for our database cluster. We've deployed our cluster using MongoDB Atlas (free, shared). Since this is just a test cluster, you may have
 access to the connection string to connect to our database either by using MongoDB Shell or by using MongoDB Compass (an interactive GUI used to interact with MongoDB): 
 ```
@@ -50,7 +50,7 @@ npm start app.js
 Alternatively, you can run:
 ```
 nodemon app.js
-
+```
 The console should now log the process and something like this should return (ignore deprecation messages):
 ```
 [nodemon] 2.0.7
